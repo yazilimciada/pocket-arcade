@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Game Platformu</title> 
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Mini Game Platformu</h1>
+        <p class="subtitle">Eğlenceye Hoş Geldin! Oyununu Seç Şefim</p>
+        
+        <div id="main-menu">
+            <h2>Hangi Oyunu Oynayacaksın?</h2>
+            <div class="menu-buttons">
+                <button id="select-xox-btn">XOX Oyunu</button>
+                <button id="select-memory-btn">Hafıza Oyunu</button>
+                <button id="select-snake-btn">Yılan Oyunu</button>
+            </div>
+        </div>
+
+        <div id="xox-area" style="display: none;">
+            <div id="score-board">
+                <div class="score-box x-score">Oyuncu X: <span id="x-score-val">0</span></div>
+                <div class="score-box o-score">Oyuncu O: <span id="o-score-val">0</span></div>
+            </div>
+
+            <div id="mode-selection">
+                <h2>Oyun Modunu Seç Şefim</h2>
+                <div class="mode-buttons">
+                    <button id="vs-friend-btn">Arkadaşınla Oyna</button>
+                    <button id="vs-computer-btn">Bilgisayara Karşı Oyna</button>
+                </div>
+            </div>
+
+            <div class="game-area" id="game-board" style="display: none;">
+                <div class="cell" data-index="0"></div>
+                <div class="cell" data-index="1"></div>
+                <div class="cell" data-index="2"></div>
+                <div class="cell" data-index="3"></div>
+                <div class="cell" data-index="4"></div>
+                <div class="cell" data-index="5"></div>
+                <div class="cell" data-index="6"></div>
+                <div class="cell" data-index="7"></div>
+                <div class="cell" data-index="8"></div>
+            </div>
+            <button id="restart-btn" style="display: none;">Yeniden Başlat</button>
+        </div>
+
+        <div id="memory-area" style="display: none;">
+            <h2>Neon Hafıza Oyunu</h2>
+            <p class="game-info-text">Eşleri Bul, Parıltıyı Yakala!</p>
+            <div id="memory-board"></div>
+            <button id="memory-restart-btn">Yeniden Başlat</button>
+        </div>
+
+        <div id="snake-area" style="display: none;">
+            <h2>Neon Yılan Oyunu</h2>
+            <p class="game-info-text">Skor: <span id="snake-score">0</span></p>
+            <canvas id="snake-canvas" width="300" height="300"></canvas>
+            
+            <div class="mobile-controls">
+                <button id="snake-up">▲</button>
+                <div class="mobile-controls-row">
+                    <button id="snake-left">◀</button>
+                    <button id="snake-right">▶</button>
+                </div>
+                <button id="snake-down">▼</button>
+            </div>
+            
+            <button id="snake-restart-btn">Yeniden Başlat</button>
+        </div>
+
+        <button id="back-to-menu-btn" style="display: none;">Ana Menüye Dön</button>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

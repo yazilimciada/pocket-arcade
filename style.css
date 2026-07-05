@@ -1,0 +1,325 @@
+/* Genel Ayarlar */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #0f111a;
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+}
+
+.container {
+    padding: 15px;
+    width: 100%;
+    max-width: 500px; /* Mobil ekranlarda taşmasın diye daralttık */
+}
+
+h1 {
+    font-size: 2rem;
+    color: #00f0ff;
+    text-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    color: #ff007f;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    text-shadow: 0 0 5px rgba(255, 0, 127, 0.3);
+}
+
+.game-info-text {
+    color: #aaa;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+/* Menü ve Seçim Panelleri */
+#main-menu, #mode-selection {
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 12px;
+    background: rgba(26, 29, 41, 0.6);
+    box-shadow: 0 0 20px rgba(0, 243, 255, 0.15);
+    border: 1px solid rgba(0, 243, 255, 0.2);
+}
+
+#main-menu h2, #mode-selection h2 {
+    color: #fff;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px #00f3ff;
+}
+
+.menu-buttons, .mode-buttons {
+    display: flex;
+    flex-direction: column; /* Mobilde butonlar alt alta gelsin */
+    gap: 15px;
+}
+
+/* Genel Butonlar */
+button {
+    padding: 12px 20px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    width: 100%; /* Mobilde tam genişlik kaplasın */
+}
+
+#select-xox-btn, #vs-friend-btn, #restart-btn, #memory-restart-btn, #snake-restart-btn {
+    border: 2px solid #00f3ff;
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+}
+#select-xox-btn:hover, #vs-friend-btn:hover, #restart-btn:hover, #memory-restart-btn:hover, #snake-restart-btn:hover {
+    background: #00f3ff;
+    color: #000;
+    box-shadow: 0 0 15px #00f3ff;
+}
+
+#select-memory-btn, #select-snake-btn, #vs-computer-btn {
+    border: 2px solid #ff007f;
+    box-shadow: 0 0 10px rgba(255, 0, 127, 0.2);
+}
+#select-memory-btn:hover, #select-snake-btn:hover, #vs-computer-btn:hover {
+    background: #ff007f;
+    color: #000;
+    box-shadow: 0 0 15px #ff007f;
+}
+
+#back-to-menu-btn {
+    margin-top: 25px;
+    border: 2px solid #ffffff;
+    padding: 10px 15px;
+    font-size: 12px;
+}
+
+/* XOX Alanı */
+#score-board {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+.score-box {
+    padding: 8px 15px;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 8px;
+    background: rgba(26, 29, 41, 0.8);
+    width: 50%;
+}
+.x-score { border: 2px solid #00f0ff; color: #00f0ff; }
+.o-score { border: 2px solid #ff007f; color: #ff007f; }
+
+.game-area {
+    display: none;
+    grid-template-columns: repeat(3, 85px); /* Mobilde sığsın diye biraz küçülttük */
+    grid-template-rows: repeat(3, 85px);
+    gap: 8px;
+    border: 2px dashed #343a40;
+    padding: 15px;
+    border-radius: 10px;
+    margin: 15px auto;
+    width: max-content;
+}
+.cell {
+    width: 85px;
+    height: 85px;
+    background-color: #1a1d29;
+    border: 2px solid #00f0ff;
+    border-radius: 8px;
+    font-size: 1.8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Hafıza Oyunu Alanı */
+#memory-board {
+    display: grid;
+    grid-template-columns: repeat(4, 65px); /* Ekrana sığması için ideal boyut */
+    grid-template-rows: repeat(4, 65px);
+    gap: 8px;
+    margin: 15px auto;
+    width: max-content;
+    padding: 10px;
+    border: 2px solid #ff007f;
+    border-radius: 12px;
+}
+.memory-card {
+    background-color: #1a1d29;
+    border: 2px solid #ff007f;
+    border-radius: 6px;
+    font-size: 1.4rem;
+    color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.memory-card.flipped { color: #fff; background-color: #252a3d; }
+.memory-card.matched { background-color: #00f0ff; border-color: #00f0ff; color: #000; }
+
+/* ================= YILAN OYUNU STİLLERİ ================= */
+#snake-canvas {
+    background: #111420;
+    border: 2px solid #00f3ff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+    display: block;
+    margin: 0 auto 15px auto;
+    max-width: 100%; /* Küçük ekranlarda otomatik küçülsün */
+}
+
+/* Mobil Tuş Takımı */
+.mobile-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    margin-bottom: 15px;
+}
+.mobile-controls-row {
+    display: flex;
+    gap: 40px;
+}
+.mobile-controls button {
+    width: 50px;
+    height: 45px;
+    padding: 0;
+    font-size: 18px;
+    background: rgba(26, 29, 41, 0.8);
+    border: 1px solid #ff007f;
+}
+
+/* ================= MOBİL VE TELEFON UYUMLULUK AYARLARI ================= */
+
+/* Çok küçük telefon ekranları için (Genel Küçültme) */
+@media (max-width: 400px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+    .subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+    }
+    /* XOX Hücrelerini telefona sığdırıyoruz */
+    .game-area {
+        grid-template-columns: repeat(3, 75px);
+        grid-template-rows: repeat(3, 75px);
+        gap: 6px;
+        padding: 10px;
+    }
+    .cell {
+        width: 75px;
+        height: 75px;
+        font-size: 1.5rem;
+    }
+    /* Hafıza kartlarını telefona sığdırıyoruz */
+    #memory-board {
+        grid-template-columns: repeat(4, 55px);
+        grid-template-rows: repeat(4, 55px);
+        gap: 6px;
+        padding: 8px;
+    }
+    .memory-card {
+        width: 55px;
+        height: 55px;
+        font-size: 1.2rem;
+    }
+    /* Yılan oyununun canvas alanını telefon ekranına göre esnetiyoruz */
+    #snake-canvas {
+        width: 100%;
+        max-width: 260px;
+        height: auto;
+    }
+}
+
+/* ================= MOBİL VE TELEFON UYUMLULUK AYARLARI ================= */
+
+/* Çok küçük telefon ekranları için (Genel Küçültme) */
+@media (max-width: 400px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+    .subtitle {
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+    }
+    /* XOX Hücrelerini telefona sığdırıyoruz */
+    .game-area {
+        grid-template-columns: repeat(3, 75px);
+        grid-template-rows: repeat(3, 75px);
+        gap: 6px;
+        padding: 10px;
+    }
+    .cell {
+        width: 75px;
+        height: 75px;
+        font-size: 1.5rem;
+    }
+    /* Hafıza kartlarını telefona sığdırıyoruz */
+    #memory-board {
+        grid-template-columns: repeat(4, 55px);
+        grid-template-rows: repeat(4, 55px);
+        gap: 6px;
+        padding: 8px;
+    }
+    .memory-card {
+        width: 55px;
+        height: 55px;
+        font-size: 1.2rem;
+    }
+    /* Yılan oyununun canvas alanını telefon ekranına göre esnetiyoruz */
+    #snake-canvas {
+        width: 100%;
+        max-width: 260px;
+        height: auto;
+    }
+}
+
+/* Tablet ve Masaüstü Ekranlar İçin (Geniş Ekran Düzeni) */
+@media (min-width: 401px) {
+    .menu-buttons, .mode-buttons {
+        flex-direction: row; /* Butonlar yan yana gelsin */
+    }
+    button { 
+        width: auto; 
+    }
+    .game-area { 
+        grid-template-columns: repeat(3, 100px); 
+        grid-template-rows: repeat(3, 100px); 
+    }
+    .cell { 
+        width: 100px; 
+        height: 100px; 
+    }
+    #memory-board { 
+        grid-template-columns: repeat(4, 80px); 
+        grid-template-rows: repeat(4, 80px); 
+    }
+    .memory-card { 
+        width: 80px; 
+        height: 80px; 
+        font-size: 1.8rem; 
+    }
+    .mobile-controls { 
+        display: none; /* Bilgisayarda dokunmatik okları gizle */
+    }
+}
